@@ -15,7 +15,7 @@ Supported Platforms
 * Silver Fabric 5
 * Linux
 
-Preinstallation Requirements
+Prerequisites
 --------------------------------------
 The following operating system groups and user are required when you are installing Oracle Database:
 
@@ -68,12 +68,26 @@ The Distribution Grid Library is created by performing the following steps:
     </grid-library>
 ```
 
-Oracle Feature Summary
+Feature Summary
 --------------------------------------
 * **Oracle RAC support** - No
 * **Dynamic clustering support** - No         
 * **Persistent software product install support** - No        
 * **Persistent data support** - Yes
+
+Component Activation
+--------------------------------------
+Depending on resources and hardware, the value of "Maximum Activation Time" of the component might need to be increased.  If you find that the component is 
+timing out during activation, increase the value.
+
+Activations of more than one Oracle component on the same host when the Runtime Context Variable DB_INSTALL_OPTION is set to "INSTALL_DB_AND_CONFIG" are synchronous. 
+The value of "Maximum Activation Time" of the component will need to be increased.  Say t represents the time it takes activate one component on a host and n represents
+the number of components that are activating on the same host.  Then it will take approximately t*n for all the components to activate.  
+
+Otherwise the activations are asynchronous.
+
+Configuring Database Control increases the time it takes for component activation.  If you would like to reduce activation time and this feature is not necessary, 
+set the CONFIG_DBCONTROL Runtime Context Variable to "false".  It is defaulted to "true". 
 
 Statistics
 --------------------------------------
@@ -124,7 +138,7 @@ Runtime Context Variables
 * **JMS_PORT** - JMS port for Database Control. 
     * Type: Environment
     * Default value: 5540
-* **DB_INSTALL_OPTION** - INSTALL_DB_SWONLY,INSTALL_DB_AND_CONFIG. 
+* **DB_INSTALL_OPTION** - INSTALL_DB_SWONLY, INSTALL_DB_AND_CONFIG. 
     * Type: Environment
     * Default value: INSTALL_DB_AND_CONFIG
 * **UNIX_GROUP_NAME** - Primary unix group name for Oracle unix user. 
@@ -179,7 +193,7 @@ Runtime Context Variables
     * Type: String
     * Default value:  AL32UTF8
 * **DB_MEMORY_LIMIT** - Database memory limit, at least 256 MB. 
-    * Type: String
+    * Type: Environment
     * Default value:  776  
 * **DB_MEMORY_OPTION** - Database memory options. 
     * Type: String
@@ -258,4 +272,4 @@ Runtime Context Variables
     * Default value:              
 * **PROXY_PWD** - Proxy password, if needed. 
     * Type: String
-    * Default value:   
+    * Default value:                                          

@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fabrician.enabler</groupId>
+	<artifactId>oracle-11gR2-enabler</artifactId>
+	<name>Oracle Database 11gR2 Enabler</name>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<description></description>
+    <properties>
+        <distribution.version>11.2.0.1.0</distribution.version>
+        <distribution.os>linux64</distribution.os>
+        
+        <ojdbc.location>${basedir}/src/main/resources/content/jars/ojdbc6.jar</ojdbc.location>
+        
+        <fabric-version>5.1.0.2</fabric-version>
+        <fabric-location>${basedir}/SilverFabricSDK.jar</fabric-location>
+        
+    </properties>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>distribution</id>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/distribution.xml</descriptor>
+							</descriptors>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+			<scope>system</scope>
+            <systemPath>${ojdbc.location}</systemPath>
+		</dependency>
+		<dependency>
+            <groupId>com.datasynapse.fabricserver</groupId>
+            <artifactId>fabric</artifactId>
+            <version>${fabric-version}</version>
+            <scope>system</scope>
+            <systemPath>${fabric-location}</systemPath>
+        </dependency>
+	</dependencies>
+</project>

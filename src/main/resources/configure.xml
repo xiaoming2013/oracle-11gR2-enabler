@@ -1,0 +1,74 @@
+<containerConfig name="Oracle Database 11gR2 Container - version 1.0">
+
+	<configFiles baseDir="response" include="emca.rsp">
+		<velocity />
+	</configFiles>
+	
+	<configFiles baseDir="dbs" include="init.ora">
+		<velocity />
+	</configFiles>
+	
+	<configFiles baseDir="." include="oraInst.loc">
+		<velocity />
+	</configFiles>
+
+	<configfiles baseDir="${ENGINE_WORK_DIR}/oracle/database/response" include="netca.rsp">
+		<regex pattern="#SHOW_GUI=false" replacement="SHOW_GUI=false" />
+		<regex pattern='INSTALL_TYPE=""typical""' replacement='INSTALL_TYPE=""custom""' />
+        <regex pattern='LISTENER_NAMES=\{"LISTENER"\}' replacement='LISTENER_NAMES={"LISTENER_1"}' />
+        <regex pattern='LISTENER_PROTOCOLS=\{"TCP;1521"\}' replacement='LISTENER_PROTOCOLS={"TCP;${TCP_PORT}", "TCPS;${TCPS_PORT}"}' />
+        <regex pattern='LISTENER_START=""LISTENER""' replacement='LISTENER_START=""LISTENER_1""' />
+        <regex pattern="NSN_NUMBER=1" replacement="NSN_NUMBER=2" />
+        <regex pattern='NSN_NAMES=\{"EXTPROC_CONNECTION_DATA"\}' replacement='NSN_NAMES={"EXTPROC_CONNECTION_DATA", "${DB_GLOBAL_NAME}"}' />
+        <regex pattern='NSN_SERVICE=\{"PLSExtProc"\}' replacement='NSN_SERVICE = {"PLSExtProc", "${DB_GLOBAL_NAME}"}' />
+        <regex pattern='NSN_PROTOCOLS=\{"TCP;HOSTNAME;1521"\}' replacement='NSN_PROTOCOLS={ "IPC;EXTPROC", "TCP;HOSTNAME;${TCP_PORT}", "TCPS;HOSTNAME;${TCPS_PORT}"}' />
+    </configfiles>  
+
+	<configfiles baseDir="${ENGINE_WORK_DIR}/oracle/database/response" include="db_install.rsp">
+		<regex pattern="oracle.install.option=" replacement="oracle.install.option=${DB_INSTALL_OPTION}" />		
+		<regex pattern="ORACLE_HOSTNAME=" replacement="ORACLE_HOSTNAME=${ORACLE_HOSTNAME}" />
+		<regex pattern="UNIX_GROUP_NAME=" replacement="UNIX_GROUP_NAME=${UNIX_GROUP_NAME}" />
+		<regex pattern="INVENTORY_LOCATION=" replacement="INVENTORY_LOCATION=${INVENTORY_LOCATION}" />
+		<regex pattern="SELECTED_LANGUAGES=" replacement="SELECTED_LANGUAGES=${SELECTED_LANGUAGES}" />
+		<regex pattern="ORACLE_HOME=" replacement="ORACLE_HOME=${ORACLE_HOME}" />
+		<regex pattern="ORACLE_BASE=" replacement="ORACLE_BASE=${ORACLE_BASE}" />
+		<regex pattern="oracle.install.db.InstallEdition=" replacement="oracle.install.db.InstallEdition=${DB_INSTALL_EDITION}" />
+		<regex pattern="oracle.install.db.isCustomInstall=false" replacement="oracle.install.db.isCustomInstall=${DB_IS_CUSTOM_INSTALL}" />
+		<regex pattern="oracle.install.db.customComponents=oracle.server:11.2.0.1.0,oracle.sysman.ccr:10.2.7.0.0,oracle.xdk:11.2.0.1.0,oracle.rdbms.oci:11.2.0.1.0,oracle.network:11.2.0.1.0,oracle.network.listener:11.2.0.1.0,oracle.rdbms:11.2.0.1.0,oracle.options:11.2.0.1.0,oracle.rdbms.partitioning:11.2.0.1.0,oracle.oraolap:11.2.0.1.0,oracle.rdbms.dm:11.2.0.1.0,oracle.rdbms.dv:11.2.0.1.0,orcle.rdbms.lbac:11.2.0.1.0,oracle.rdbms.rat:11.2.0.1.0" replacement="oracle.install.db.customComponents=${DB_CUSTOM_COMPONENTS}" />
+		<regex pattern="oracle.install.db.DBA_GROUP=" replacement="oracle.install.db.DBA_GROUP=${DB_DBA_GROUP}" />
+		<regex pattern="oracle.install.db.OPER_GROUP=" replacement="oracle.install.db.OPER_GROUP=${DB_OPER_GROUP}" />
+		<regex pattern="oracle.install.db.config.starterdb.type=" replacement="oracle.install.db.config.starterdb.type=${DB_TYPE}" />
+		<regex pattern="oracle.install.db.config.starterdb.globalDBName=" replacement="oracle.install.db.config.starterdb.globalDBName=${DB_GLOBAL_NAME}" />
+		<regex pattern="oracle.install.db.config.starterdb.SID=" replacement="oracle.install.db.config.starterdb.SID=${ORACLE_SID}" />
+		<regex pattern="oracle.install.db.config.starterdb.characterSet=AL32UTF8" replacement="oracle.install.db.config.starterdb.characterSet=${DB_CHARACTER_SET}" />
+		<regex pattern="oracle.install.db.config.starterdb.memoryOption=true" replacement="oracle.install.db.config.starterdb.memoryOption=${DB_MEMORY_OPTION}" />
+		<regex pattern="oracle.install.db.config.starterdb.memoryLimit=" replacement="oracle.install.db.config.starterdb.memoryLimit=${DB_MEMORY_LIMIT}" />
+		<regex pattern="oracle.install.db.config.starterdb.installExampleSchemas=false" replacement="oracle.install.db.config.starterdb.installExampleSchemas=${DB_EXAMPLE_SCHEMAS}" />
+		<regex pattern="oracle.install.db.config.starterdb.password.ALL=" replacement="oracle.install.db.config.starterdb.password.ALL=${DB_PASSWORD_ALL}" />
+		<regex pattern="oracle.install.db.config.starterdb.password.SYS=" replacement="oracle.install.db.config.starterdb.password.SYS=${SYS_PWD}" />
+		<regex pattern="oracle.install.db.config.starterdb.password.SYSTEM=" replacement="oracle.install.db.config.starterdb.password.SYSTEM=${SYSTEM_PWD}" />
+		<regex pattern="oracle.install.db.config.starterdb.password.SYSMAN=" replacement="oracle.install.db.config.starterdb.password.SYSMAN=${SYSMAN_PWD}" />
+		<regex pattern="oracle.install.db.config.starterdb.password.DBSNMP=" replacement="oracle.install.db.config.starterdb.password.DBSNMP=${DBSNMP_PWD}" />
+		<regex pattern="oracle.install.db.config.starterdb.control=DB_CONTROL" replacement="oracle.install.db.config.starterdb.control=${DB_CONTROL_TYPE}" />
+		<regex pattern="oracle.install.db.config.starterdb.gridcontrol.gridControlServiceURL=" replacement="oracle.install.db.config.starterdb.gridcontrol.gridControlServiceURL=${GRID_CONTROL_URL}" />
+		<regex pattern="oracle.install.db.config.starterdb.dbcontrol.enableEmailNotification=false" replacement="oracle.install.db.config.starterdb.dbcontrol.enableEmailNotification=${ENABLE_EMAIL_ALERTS}" />
+		<regex pattern="oracle.install.db.config.starterdb.dbcontrol.emailAddress=" replacement="oracle.install.db.config.starterdb.dbcontrol.emailAddress=${EMAIL_ADDRESS}" />
+		<regex pattern="oracle.install.db.config.starterdb.dbcontrol.SMTPServer=" replacement="oracle.install.db.config.starterdb.dbcontrol.SMTPServer=${SMTP_SERVER}" />
+		<regex pattern="oracle.install.db.config.starterdb.automatedBackup.enable=false" replacement="oracle.install.db.config.starterdb.automatedBackup.enable=${ENABLE_AUTO_BACKUP}" />
+		<regex pattern="oracle.install.db.config.starterdb.automatedBackup.osuid=" replacement="oracle.install.db.config.starterdb.automatedBackup.osuid=${AUTO_BACKUP_USER}" />
+		<regex pattern="oracle.install.db.config.starterdb.automatedBackup.ospwd=" replacement="oracle.install.db.config.starterdb.automatedBackup.ospwd=${AUTO_BACKUP_PASSWORD}" />
+		<regex pattern="oracle.install.db.config.starterdb.storageType=" replacement="oracle.install.db.config.starterdb.storageType=${DB_STORAGE_TYPE}" />
+		<regex pattern="oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=" replacement="oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=${DB_DATA_LOC}" />
+		<regex pattern="oracle.install.db.config.starterdb.fileSystemStorage.recoveryLocation=" replacement="oracle.install.db.config.starterdb.fileSystemStorage.recoveryLocation=${DB_RECOVERY_LOCATION}" />
+		<regex pattern="oracle.install.db.config.asm.diskGroup=" replacement="oracle.install.db.config.asm.diskGroup=${ASM_DISK_GROUP}" />
+		<regex pattern="oracle.install.db.config.asm.ASMSNMPPassword=" replacement="oracle.install.db.config.asm.ASMSNMPPassword=${ASM_SNMP_PASSWORD}" />
+		<regex pattern="MYORACLESUPPORT_USERNAME=" replacement="MYORACLESUPPORT_USERNAME=${MYORACLESUPPORT_USERNAME}" />
+		<regex pattern="MYORACLESUPPORT_PASSWORD=" replacement="MYORACLESUPPORT_PASSWORD=${MYORACLESUPPORT_PASSWORD}" />
+		<regex pattern="SECURITY_UPDATES_VIA_MYORACLESUPPORT=" replacement="SECURITY_UPDATES_VIA_MYORACLESUPPORT=${SECURITY_UPDATES_VIA_MYORACLESUPPORT}" />
+		<regex pattern="DECLINE_SECURITY_UPDATES=" replacement="DECLINE_SECURITY_UPDATES=${DECLINE_SECURITY_UPDATES}" />
+		<regex pattern="PROXY_HOST=" replacement="PROXY_HOST=${PROXY_HOST}" />
+		<regex pattern="PROXY_PORT=" replacement="PROXY_PORT=${PROXY_PORT}" />
+		<regex pattern="PROXY_USER=" replacement="PROXY_USER=${PROXY_USER}" />
+		<regex pattern="PROXY_PWD=" replacement="PROXY_PWD=${PROXY_PWD}" />
+	</configfiles>
+</containerConfig>

@@ -1,0 +1,568 @@
+<container class="com.datasynapse.fabric.container.ExecContainer"
+	name="OracleDatabase11gR2Container">
+
+	<property name="name" value="Oracle Database 11gR2 Container" />
+	<property name="version" value="${project.version}" />
+	<property name="distributionVersion" value="${distribution.version}" />
+	<property name="blocking" value="false" />
+	<property name="supportedDomainType" value="Default" />
+	<property name="shutdownTimeout" value="300000" />
+	<property name="description" value="Oracle 11gR2 Database" />
+	<property name="workDir" value="${ORACLE_DIR}" />
+
+	<script class="com.datasynapse.fabric.common.script.Script">
+		<property name="languageVersion" value="2.5" />
+		<property name="name" value="OracleDatabaseContainer.py" />
+		<property name="language" value="python" />
+	</script>
+
+	<unixcommand class="com.datasynapse.fabric.container.LifecycleCommand">
+		<property name="startupCommand" value="${ORACLE_DIR}/bin/startup.sh" />
+		<property name="shutdownCommand" value="${ORACLE_DIR}/bin/shutdown.sh" />
+	</unixcommand>
+
+	<supportedFeature class="com.datasynapse.fabric.container.Feature">
+		<property name="name" value="HTTP Support" />
+		<property name="description" value="Support for HTTP routing" />
+		<property name="infoDescription"
+			value="Specify the protocols to report to the Broker for HTTP routing." />
+		<property name="infoClass"
+			value="com.datasynapse.fabric.domain.featureinfo.HttpFeatureInfo" />
+	</supportedFeature>
+
+	<supportedFeature class="com.datasynapse.fabric.container.Feature">
+		<property name="name" value="Application Logging Support" />
+		<property name="description"
+			value="Support for handling of custom application logs" />
+		<property name="infoDescription"
+			value="Specify how often checkpoint copies of application log files are made, and whether or not application logs are archived upon deactivation." />
+		<property name="infoClass"
+			value="com.datasynapse.fabric.domain.featureinfo.ApplicationLoggingInfo" />
+	</supportedFeature>
+
+	<runtimecontexttemplate
+		class="com.datasynapse.fabric.common.DefaultRuntimeContext">
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ENGINE_WORK_DIR}/oracle" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle work directory" />
+			<property name="name" value="ORACLE_DIR" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/oracle.mnt" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle maintenance file" />
+			<property name="name" value="ORACLE_MAINT_FILE" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/database/response/db_install.rsp" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="DBCA silent install response file" />
+			<property name="name" value="DBCA_RESPONSE_FILE" />
+		</variable>
+						
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/database/response/netca.rsp" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="NETCA silent install response file" />
+			<property name="name" value="NETCA_RESPONSE_FILE" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/response/emca.rsp" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="EMCA silent install response file" />
+			<property name="name" value="EMCA_RESPONSE_FILE" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="true" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Configure Database Control" />
+			<property name="name" value="CONFIG_DBCONTROL" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Email address for Enterprise Manager notifications" />
+			<property name="name" value="EMAIL_ADDRESS" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="SMTP Mail server for EM notifications" />
+			<property name="name" value="MAIL_SERVER_NAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="1522" />
+			<property name="autoIncrementType" value="Numeric" />
+			<property name="type" value="Environment" />
+			<property name="description" value="TNS Listener TCP port" />
+			<property name="name" value="TCP_PORT" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="2484" />
+			<property name="autoIncrementType" value="Numeric" />
+			<property name="type" value="Environment" />
+			<property name="description" value="TNS Listener TCPS port" />
+			<property name="name" value="TCPS_PORT" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="1158" />
+			<property name="autoIncrementType" value="Numeric" />
+			<property name="type" value="Environment" />
+			<property name="description" value="DB Control Https Port" />
+			<property name="name" value="DBCONTROL_HTTP_PORT" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="3938" />
+			<property name="autoIncrementType" value="Numeric" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Management Agent port for Database Control" />
+			<property name="name" value="AGENT_PORT" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="5520" />
+			<property name="autoIncrementType" value="Numeric" />
+			<property name="type" value="Environment" />
+			<property name="description" value="RMI port for Database Control" />
+			<property name="name" value="RMI_PORT" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="5540" />
+			<property name="autoIncrementType" value="Numeric" />
+			<property name="type" value="Environment" />
+			<property name="description" value="JMS port for Database Control" />
+			<property name="name" value="JMS_PORT" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="INSTALL_DB_AND_CONFIG" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="INSTALL_DB_SWONLY, INSTALL_DB_AND_CONFIG" />
+			<property name="name" value="DB_INSTALL_OPTION" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="oinstall" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description"
+				value="Primary unix group name for Oracle unix user" />
+			<property name="name" value="UNIX_GROUP_NAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description"
+				value="Oracle unix user name, if engine is Run As root" />
+			<property name="name" value="UNIX_USER_NAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/app/oraInventory" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Oracle inventory location" />
+			<property name="name" value="INVENTORY_LOCATION" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/oraInst.loc" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle inventory location file" />
+			<property name="name" value="ORAINST" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="en" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="Comma spearated list of 2-letter lanaguge codes" />
+			<property name="name" value="SELECTED_LANGUAGES" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value"
+				value="${ORACLE_BASE}/product/${container.getDistributionVersion()}/dbhome" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle home directory" />
+			<property name="name" value="ORACLE_HOME" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/app/oracle" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle base directory" />
+			<property name="name" value="ORACLE_BASE" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="EE" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value=" EE, SE, SEONE, PE" />
+			<property name="name" value="DB_INSTALL_EDITION" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="true" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Is it a custom install" />
+			<property name="name" value="DB_IS_CUSTOM_INSTALL" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="List of custom components in the form internal-component-name:version" />
+			<property name="name" value="DB_CUSTOM_COMPONENTS" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="dba" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="DBA group name" />
+			<property name="name" value="DB_DBA_GROUP" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="dba" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="OPER group name" />
+			<property name="name" value="DB_OPER_GROUP" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="GENERAL_PURPOSE" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="GENERAL_PURPOSE,TRANSACTION_PROCESSING, DATAWAREHOUSE" />
+			<property name="name" value="DB_TYPE" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_SID}" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Global Database name" />
+			<property name="name" value="DB_GLOBAL_NAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="orcl" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Database name" />
+			<property name="name" value="DB_NAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="orcl" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle SID" />
+			<property name="name" value="ORACLE_SID" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_SID}" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Oracle Unique Name" />
+			<property name="name" value="ORACLE_UNQNAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="AL32UTF8" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="Database character set: See Oracle documentation" />
+			<property name="name" value="DB_CHARACTER_SET" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="776" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description" value="Database memory limit, at least 256 MB" />
+			<property name="name" value="DB_MEMORY_LIMIT" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="true" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Database memory options" />
+			<property name="name" value="DB_MEMORY_OPTION" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="false" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Install example schemas" />
+			<property name="name" value="DB_EXAMPLE_SCHEMAS" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="SuperAdmin01" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Password used for SYS, SYSTEM, SYSMAN, DBSNMP if not set." />
+			<property name="name" value="DB_PASSWORD_ALL" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Password for SYS" />
+			<property name="name" value="SYS_PWD" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Password for SYSTEM" />
+			<property name="name" value="SYSTEM_PWD" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Password for SYSMAN" />
+			<property name="name" value="SYSMAN_PWD" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Password for DBSNMP" />
+			<property name="name" value="DBSNMP_PWD" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="DB_CONTROL" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="DB_CONTROL, GRID_CONTROL" />
+			<property name="name" value="DB_CONTROL_TYPE" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="GRID CONTROL Url, if enabled" />
+			<property name="name" value="GRID_CONTROL_URL" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="false" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="Enable email notification for critical database alerts" />
+			<property name="name" value="ENABLE_EMAIL_ALERTS" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Email address to send database alerts" />
+			<property name="name" value="EMAIL_ADDRESS" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="SMTP server for sending email alerts" />
+			<property name="name" value="SMTP_SERVER" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="false" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Enable automated backups" />
+			<property name="name" value="ENABLE_AUTO_BACKUP" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="OS user for automatic backup, if enabled" />
+			<property name="name" value="AUTO_BACKUP_USER" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="OS password for automatic backup, if enabled" />
+			<property name="name" value="AUTO_BACKUP_PASSWORD" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="FILE_SYSTEM_STORAGE" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="FILE_SYSTEM_STORAGE, ASM_STORAGE" />
+			<property name="name" value="DB_STORAGE_TYPE" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_BASE}/app/dbdata" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="Environment" />
+			<property name="description"
+				value="Data location. Warning: ORACLE_BASE is deleted on shutdown" />
+			<property name="name" value="DB_DATA_LOC" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="${ORACLE_DIR}/app/oraRecovery" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="File system storage recovery location" />
+			<property name="name" value="DB_RECOVERY_LOCATION" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="Automatic Storage Management disk group, if enabled" />
+			<property name="name" value="ASM_DISK_GROUP" />
+		</variable>
+
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description"
+				value="Automatic Storage Management SNMP password, if enabled" />
+			<property name="name" value="ASM_SNMP_PASSWORD" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="My Oracle Support user name" />
+			<property name="name" value="MYORACLESUPPORT_USERNAME" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="My Oracle Support password" />
+			<property name="name" value="MYORACLESUPPORT_PASSWORD" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="false" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Security updates via my oracle support" />
+			<property name="name" value="SECURITY_UPDATES_VIA_MYORACLESUPPORT" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="true" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Decline security updates" />
+			<property name="name" value="DECLINE_SECURITY_UPDATES" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Proxy host for security updates, if needed" />
+			<property name="name" value="PROXY_HOST" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Proxy port for security updates, if needed" />
+			<property name="name" value="PROXY_PORT" />
+		</variable>
+
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Proxy user name, if needed" />
+			<property name="name" value="PROXY_USER" />
+		</variable>
+		
+		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
+			<property name="value" value="" />
+			<property name="autoIncrementType" value="None" />
+			<property name="type" value="String" />
+			<property name="description" value="Proxy password, if needed" />
+			<property name="name" value="PROXY_PWD" />
+		</variable>
+	</runtimecontexttemplate>
+
+
+</container>

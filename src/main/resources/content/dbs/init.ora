@@ -1,0 +1,26 @@
+${ORACLE_SID}.__db_cache_size=318767104
+${ORACLE_SID}.__java_pool_size=4194304
+${ORACLE_SID}.__large_pool_size=4194304
+${ORACLE_SID}.__oracle_base='${ORACLE_BASE}'#ORACLE_BASE set from environment
+${ORACLE_SID}.__pga_aggregate_target=327155712
+${ORACLE_SID}.__sga_target=486539264
+${ORACLE_SID}.__shared_io_pool_size=0
+${ORACLE_SID}.__shared_pool_size=146800640
+${ORACLE_SID}.__streams_pool_size=0
+*.audit_file_dest='${ORACLE_BASE}/admin/orcl/adump'
+*.audit_trail='db'
+*.compatible='11.2.0.0.0'
+*.control_files='${DB_DATA_LOC}/${DB_NAME}/control01.ctl','${ORACLE_BASE}/flash_recovery_area/${DB_NAME}/control02.ctl'
+*.db_block_size=8192
+*.db_domain=''
+*.db_name='${DB_NAME}'
+*.db_recovery_file_dest='${ORACLE_BASE}/flash_recovery_area'
+*.db_recovery_file_dest_size=4070572032
+*.diagnostic_dest='${ORACLE_BASE}'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=${DB_GLOBAL_NAME}XDB)'
+*.local_listener='(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = ${TCP_PORT}))'
+*.memory_target=813694976
+*.open_cursors=300
+*.processes=150
+*.remote_login_passwordfile='EXCLUSIVE'
+*.undo_tablespace='UNDOTBS1'
