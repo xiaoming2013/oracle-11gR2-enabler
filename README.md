@@ -44,8 +44,7 @@ Runtime Grid Library
 The Enabler Runtime Grid Library is created by building the maven project. The build depends on the SilverFabricSDK jar file that is distributed with TIBCO Silver Fabric. 
 The SilverFabricSDK.jar file needs to be referenced in the maven pom.xml or it can be placed in the project root directory.  
 
-The build also depends on the Oracle JDBC Driver (ojdbc6.jar). The ojdbc6.jar needs needs to be referenced in the maven pom.xml or 
-it can be placed in the ${project root directory}/src/main/resources/jars directory.
+The build also depends on the Oracle JDBC Driver (ojdbc6.jar). The ojdbc6.jar needs to be copied to the ${project root directory}/src/main/resources/jars directory.
 The ojdbc6.jar can be found at http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html
 
 ```bash
