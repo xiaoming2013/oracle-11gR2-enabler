@@ -10,7 +10,7 @@
         <distribution.version>11.2.0.1.0</distribution.version>
         <distribution.os>linux64</distribution.os>
         
-        <ojdbc.location>${basedir}/src/main/resources/content/jars/ojdbc6.jar</ojdbc.location>
+        <ojdbc.location>${basedir}/src/main/resources/jars/ojdbc6.jar</ojdbc.location>
         
         <fabric-version>5.1.0.2</fabric-version>
         <fabric-location>${basedir}/SilverFabricSDK.jar</fabric-location>
