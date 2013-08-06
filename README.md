@@ -27,9 +27,17 @@ The following operating system groups and user are required when you are install
 
 Refer to the Oracle Documentation for more information: http://docs.oracle.com/cd/E11882_01/install.112/e24321/pre_install.htm#BABHHEJD
 
+The operating system shared memory size (shmmax) might need to be tweeked depending on its size.  Refer to the Oracle Documentation
+for more information on their recommendations for this at http://docs.oracle.com/cd/E11882_01/install.112/e24321/pre_install.htm#CIHEGJEH
+The following website can be used as a guide on how to change the shared memory (shmmax): 
+<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Tuning_and_Optimizing_Red_Hat_Enterprise_Linux_for_Oracle_9i_and_10g_Databases/chap-Oracle_9i_and_10g_Tuning_Guide-Setting_Shared_Memory.html">Setting Shared Memory</a>
+
+The database memory limit has been defaulted to 776MB.  This value can be changed via the Runtime Context Variable DB_MEMORY_LIMIT.
+
 The Silver Fabric engine that will be running the Oracle Database 11gR2 Enabler can either be run as the user created above or as root.  If 
-the engine is run as root, the RuntimeContextVariable ${UNIX_USER_NAME} value needs to be set to the user created above. Additionally, the
+the engine is run as root, the Runtime Context Variable UNIX_USER_NAME value needs to be set to the user created above. Additionally, the
 path to the engine work directory needs to have read and execute priviledges for the user created above.
+
 
 Installation
 --------------------------------------
