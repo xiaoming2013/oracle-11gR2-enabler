@@ -351,6 +351,7 @@
 			<property name="type" value="String" />
 			<property name="description" value="Password used for SYS, SYSTEM, SYSMAN, DBSNMP if not set." />
 			<property name="name" value="DB_PASSWORD_ALL" />
+			<property name="export" value="true" />
 		</variable>
 
 		<variable class="com.datasynapse.fabric.common.RuntimeContextVariable">
